@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "ts-node-dev --respawn src/externals-interfaces/index.ts",
     "start:test": "vitest"
   },
   "keywords": [],
