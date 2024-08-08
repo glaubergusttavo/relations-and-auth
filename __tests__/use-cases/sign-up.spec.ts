@@ -2,37 +2,8 @@ import { describe, it, expect } from "vitest";
 
 import { makeUser } from "../mock/entities/user";
 import { InMemoryUsersRepository } from "../repositories/in-memory-users";
-import { UsersRepository } from "../../src/use-cases/interfaces/users-repository";
 import { SignUpError } from "../../src/use-cases/errors/sign-up";
-import { User } from "../../src/entities/users";
-import { CreateUserError } from "../../src/entities/errors/create-user";
-
-export interface SingUpProps{
-    name: string
-    email: string
-    password: string
-}
-
-export class SignUpUseCase{
-    constructor(
-        private readonly userRepository: UsersRepository
-    ){}
-
-    async execute(props: SingUpProps): Promise < SignUpError | undefined>{
-
-        const userExist = await this.userRepository.findByEmail(props.email)
-        if(userExist){
-            return new SignUpError("User already exists!")
-        }
-        
-        const newUserOrError = User.create(props)
-
-        if(newUserOrError instanceof CreateUserError){
-            return newUserOrError
-        }
-        await this.userRepository.save(newUserOrError)
-    }
-}
+import { SignUpUseCase } from "../../src/use-cases/sign-up";
 
 describe("SignUpUseCase", () => {
     it("should not be able to signUp with user that already exists", async () => {
