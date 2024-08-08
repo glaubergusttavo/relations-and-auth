@@ -17,6 +17,11 @@ export class InMemoryUsersRepository implements UsersRepository{
         return this.users.find(user => user.getId === id) 
     }
 
+    async findByEmail(email: string){
+        return this.users.find(user => user.getEmail === email) 
+    }
+
+
     async update(user: User) {
      const index = this.users.findIndex(user => user.getId == user.getId)
      this.users[index] = user;
