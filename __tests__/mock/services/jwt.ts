@@ -7,7 +7,7 @@ export const makeJwtService = (): JwtService => {
     },
 
     async verifyToken(token: string) {
-      return true
+      return 'test'
     }
   }
 }
