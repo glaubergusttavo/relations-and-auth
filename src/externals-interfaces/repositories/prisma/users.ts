@@ -1,4 +1,3 @@
-import { CreateUserError } from "../../../entities/errors/create-user";
 import { User } from "../../../entities/users";
 import { UsersRepository } from "../../../use-cases/interfaces/users-repository";
 import { prisma } from "../../prisma";

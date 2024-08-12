@@ -2,6 +2,7 @@ import { CreateProductError } from "./errors/create-product"
 
 export interface ProductProps {
     id?: string
+    userId: string
     type: string
     mark: string
     price: number
@@ -9,6 +10,7 @@ export interface ProductProps {
  
  export class Product {
     private id: string
+    private userId: string
     private type: string
     private mark: string
     private price: number
@@ -28,9 +30,14 @@ export interface ProductProps {
     get getPrice() {
        return this.price
     }
+
+    get getUserId() {
+      return this.userId
+   }
  
     private constructor(props: ProductProps) {
        this.id = props.id || crypto.randomUUID();
+       this.userId = props.userId
        this.type = props.type
        this.mark = props.mark
        this.price = props.price

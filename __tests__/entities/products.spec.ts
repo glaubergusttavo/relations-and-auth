@@ -6,8 +6,9 @@ import { Product } from "../../src/entities/products"
 describe("Product", () => {
    describe("createProduct", () => {
 
-      it("should be able to create product without passing ID", () => {
+      it("should be able to create product without passing ID product", () => {
          const product = Product.create({
+            userId: "userId",
             type: "test",
             mark: "testMark",
             price: 9.99
@@ -19,6 +20,7 @@ describe("Product", () => {
       it("should be able to create product passing ID", () => {
          const product = Product.create({
             id: "testeId",
+            userId: "userId",
             type: "test",
             mark: "testMark",
             price: 9.99
@@ -29,6 +31,7 @@ describe("Product", () => {
 
       it("should not be able to create product with type lenght greater that 15 characters", () => {
          const product = Product.create({
+            userId: "userId",
             type: "testllllllllllll",
             mark: "testMark",
             price: 9.99
@@ -41,6 +44,7 @@ describe("Product", () => {
    describe("updatePrice", () => {
       it("should not be able to update value price if value is the same declared", () => {
          const product = Product.create({
+            userId: "userId",
             type: "test",
             mark: "testMark",
             price: 10
@@ -53,6 +57,7 @@ describe("Product", () => {
 
       it("should not be able to update price if value is greater that 5.000", () => {
          const product = Product.create({
+            userId: "userId",
             type: "test",
             mark: "testMark",
             price: 10
@@ -65,6 +70,7 @@ describe("Product", () => {
       
       it("should be able to update price", () =>{
          const product = Product.create({
+            userId: "userId",
             type: "test",
             mark: "testMark",
             price: 10
