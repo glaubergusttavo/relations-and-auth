@@ -54,7 +54,7 @@ describe("CreateProductUseCase", () => {
             productsRepository.save(product)
 
             const createError = await createProductUseCase.execute({
-                userId: user.getId,
+                userId: product.getUserId,
                 type: product.getType,
                 mark: product.getMark,
                 price: 9.99

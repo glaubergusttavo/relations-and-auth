@@ -14,8 +14,9 @@ export const verifyTokenMiddleware = async (req: Request, res: Response, next: N
     const tokenDecodedOrError = await jwtService.verifyToken(token)
   
     if (tokenDecodedOrError instanceof Error) {
-      return res.status(401).json({ message: 'Unauthorized!' })
+      return res.status(401).json({ message: tokenDecodedOrError.message })
     }
+    req.user = tokenDecodedOrError
   
     next()
   }

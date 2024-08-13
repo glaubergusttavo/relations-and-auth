@@ -5,7 +5,8 @@ import { verifyTokenMiddleware } from "../middleware/jwt";
 const router = Router();
 
 router.post('/createProduct', verifyTokenMiddleware, async (req: Request, res: Response) =>{
-    const {userId, type, mark, price} = req.body
+    const {type, mark, price} = req.body
+    const userId = req.user
 
     const controller = makeCreateProductController();
 

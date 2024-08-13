@@ -44,6 +44,20 @@ export class PrismaProductsRepository implements ProductsRepository {
         return undefined;
 
     }
+    async findByMark(mark: string) {
+        const productsMark = await prisma.product.findMany({
+            where: {mark:mark}
+        })
+        return productsMark.map(product => {
+            return Product.create({
+                userId: product.user_id,
+                id: product.id,
+                type: product.type,
+                mark: product.mark,
+                price: product.price
+            }) as Product
+        })
+    }
     async update(product: Product) {
         prisma.product.update({
             where: { id: product.getId },
