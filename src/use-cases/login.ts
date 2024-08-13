@@ -15,7 +15,7 @@ export class LoginUseCase {
     constructor(
         private readonly userRepository: UsersRepository,
         private readonly jwtService: JwtService
-    ) { }
+    ) {}
 
     async execute(props: LoginProps): Promise <LoginError | LoginUseCaseReturn> {
         const userExist = await this.userRepository.findByEmail(props.email)

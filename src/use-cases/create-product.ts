@@ -17,12 +17,21 @@ export class CreateProductUseCase {
     ) { }
 
     async execute(props: CreateProductProps) {
-        
+
         const userExist = await this.usersRepository.findById(props.userId)
 
         if (!userExist) {
             return new CreateProductError("ID invalid -> User does not exists!")
         }
+
+        const markProducts = await this.productsRepository.findByMark(props.mark)
+        const userMarkProducts = markProducts.filter(product => product.getUserId === props.userId)
+        const productAlreadyExists = userMarkProducts.find(product => product.getType === props.type)
+
+        if (productAlreadyExists) {
+            return new CreateProductError("Product already exists!")
+        }
+        
         const createOrError = Product.create(props)
 
         if (createOrError instanceof CreateProductError) {
@@ -31,3 +40,4 @@ export class CreateProductUseCase {
         await this.productsRepository.save(createOrError);
     }
 }
+

@@ -17,6 +17,10 @@ export class InMemoryProductsRepository implements ProductsRepository{
         return this.products.find(product => product.getId === id) 
     }
 
+    async findByMark(mark: string){
+        return this.products.filter(product => product.getMark === mark) 
+    }
+
     async update(product: Product) {
      const index = this.products.findIndex(product => product.getId == product.getId)
      this.products[index] = product
